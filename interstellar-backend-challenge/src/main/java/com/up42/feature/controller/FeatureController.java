@@ -44,7 +44,7 @@ public class FeatureController {
 	/**
 	 * GET method responsible to return a single features according to the {id} in the URL path.
 	 * 
-	 * If no feature with the provided ID is found, returns a HTTP 400 response status.
+	 * If no feature with the provided ID is found, returns a HTTP 404 response status.
 	 * 
 	 * @return FeatureResponseDTO
 	 */
@@ -56,7 +56,7 @@ public class FeatureController {
 	/**
 	 * GET method responsible to return an image according to the {id} of the respective feature in the URL path.
 	 * 
-	 * If no feature with the provided ID is found, returns a HTTP 400 response status.
+	 * If no feature with the provided ID is found, returns a HTTP 404 response status.
 	 * 
 	 * @return byte[] respresentation of a PNG image
 	 */
