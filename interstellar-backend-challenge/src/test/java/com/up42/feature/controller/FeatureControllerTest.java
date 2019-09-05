@@ -53,7 +53,7 @@ public class FeatureControllerTest extends AbstractTest {
 	}
 
 	/**
-	 * Failure test for the "/features/{id}" endpoint which checks for a HTTP 400 status response
+	 * Failure test for the "/features/{id}" endpoint which checks for a HTTP 404 status response
 	 * 
 	 * @throws Exception
 	 */
