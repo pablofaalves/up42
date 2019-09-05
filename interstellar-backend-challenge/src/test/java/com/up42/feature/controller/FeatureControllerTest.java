@@ -61,7 +61,7 @@ public class FeatureControllerTest extends AbstractTest {
 	public void getFeatureTestFailure() throws Exception {
 		String featureId = "999999";
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/features/" + featureId + "/")).andReturn();
-		assertEquals(result.getResponse().getStatus(), HttpStatus.BAD_REQUEST.value());
+		assertEquals(result.getResponse().getStatus(), HttpStatus.NOT_FOUND.value());
 	}
 
 	/**
