@@ -2,6 +2,7 @@ package com.up42.feature.service;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +38,8 @@ public class FeatureServiceImpl implements IFeatureService {
 	 * @return Feature
 	 */
 	public Feature findFeatureById(String id) {
-		Feature feature = featureMapping.get(id);
-		
-		if (feature == null) {
-			throw new FeatureNotFoundException(id);
-		}
-		
-		return feature;
+		Optional<Feature> feature = Optional.ofNullable(featureMapping.get(id));
+		return feature.map((obj) -> { return obj; })
+				.orElseThrow(() -> new FeatureNotFoundException(id));
 	}
 }

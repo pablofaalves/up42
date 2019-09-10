@@ -3,6 +3,8 @@ package com.up42.feature.controller;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +60,13 @@ public class FeatureController {
 	 * 
 	 * If no feature with the provided ID is found, returns a HTTP 404 response status.
 	 * 
-	 * @return byte[] respresentation of a PNG image
+	 * @return byte[] representation of a PNG image
 	 */
 	@GetMapping(value = "/{id}/quicklook", produces = MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<byte[]> getImage(@PathVariable String id) {
-		return new ResponseEntity<byte[]>(Base64.getDecoder().decode(
-				service.findFeatureById(id).getProperties().getQuicklook()), HttpStatus.OK);
+		return Optional.ofNullable(service.findFeatureById(id).getProperties().getQuicklook()).map((quicklook) -> {
+			byte[] decodedImage = Base64.getDecoder().decode(quicklook);
+			return new ResponseEntity<byte[]>(decodedImage, HttpStatus.OK);
+		}).orElse(new ResponseEntity<byte[]>(new byte[0], HttpStatus.NOT_FOUND));
 	}
 }
